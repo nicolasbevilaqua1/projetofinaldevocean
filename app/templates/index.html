@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>3S Storado Storage System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+        <h1>3S Storado Storage System</h1>
+    </div>
+
+    <div class="col-8 m-auto pt-2 pb-2 text-center">
+        <a href="/form" class="btn btn-success"> Adicionar</a>
+    </div>
+    <div class="col-8 m-auto pt-3 pb-2 text-center">
+    <form method="get">
+        <input type="text" id="search" name="search" class="form-control" placeholder="Buscar descrição ...">
+    </form>
+    </div>
+
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Código</th>
+      <th scope="col">Quantidade</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for dbs in db %}
+    <tr>
+      <th> {{dbs.id}} </th>
+      <td>{{dbs.descricao}}</td>
+      <td>{{dbs.categoria}}</td>
+      <td>{{dbs.codigo}}</td>
+      <td>{{dbs.quantidade}}</td>
+      <td>
+          <a href="/view/{{dbs.id}}/" class="btn btn-dark">Visualizar</a>
+          <a href="/edit/{{dbs.id}}/" class="btn btn-primary">Editar</a>
+          <a href="/delete/{{dbs.id}}/" class="btn btn-danger btnDel">Deletar</a>
+      </td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+<div class="pagination">
+    {% if db.has_previous %}
+        <a href="?page={{db.previous_page_number}}"> < </a>
+    {% endif %}
+
+    {{db.number}}
+
+    {% if db.has_next %}
+        <a href="?page={{db.next_page_number}}"> > </a>
+    {% endif %}
+</div>
+
+</body>
+</html>
